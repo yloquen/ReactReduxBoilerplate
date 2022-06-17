@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: {
         app: path.join(__dirname, 'src', 'index.tsx')
     },
@@ -24,6 +24,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: '/node_modules/'
+            },
+            {
+                test: /\.(s(a|c)ss)$/,
+                use: ['style-loader','css-loader', 'sass-loader']
             }
         ]
     },

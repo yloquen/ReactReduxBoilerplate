@@ -1,6 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
 import mainReducer from "./features/main/mainSlice";
-import usersReducer from "./features/main/usersSlice";
+import usersReducer from "./features/users/usersSlice";
+import postsReducer from "./features/posts/postsSlice";
 
 
 const store = configureStore(
@@ -8,7 +9,8 @@ const store = configureStore(
     reducer:
         {
             main:mainReducer,
-            users:usersReducer
+            users:usersReducer,
+            posts:postsReducer
         }
 });
 

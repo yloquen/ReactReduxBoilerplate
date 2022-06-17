@@ -1,15 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {makeRequest} from "../../comm/Server";
 import {useDispatch} from "react-redux";
+import {LoadStatus} from "../../enums/enums";
 
 
-export enum LoadState
-{
-    NOT_STARTED,
-    LOADING,
-    LOADED,
-    ERROR
-}
+
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async (_,thunkAPI) =>
 {
@@ -23,18 +18,23 @@ const userSlice = createSlice(
     initialState:
     {
         list:[],
-        status:LoadState.NOT_STARTED
+        status:LoadStatus.NOT_STARTED
     },
     reducers:
     {
-        setUsers(state, action)
+        setStatus(state, action:{payload:LoadStatus})
         {
-            state.status = LoadState.LOADED;
+            state.status = action.payload;
+        },
+
+        setUsers(state, action:{payload:any})
+        {
+            state.status = LoadStatus.LOADED;
             state.list = action.payload;
         }
     }
 });
 
-export const { setUsers } = userSlice.actions;
+export const { setStatus, setUsers } = userSlice.actions;
 
 export default userSlice.reducer;

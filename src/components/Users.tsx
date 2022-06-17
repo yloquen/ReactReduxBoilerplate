@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store";
-import {fetchUsers, LoadState} from "../features/main/usersSlice";
+import {fetchUsers} from "../features/users/usersSlice";
+import {LoadStatus} from "../enums/enums";
 
 
 export const Users = () =>
@@ -10,11 +11,15 @@ export const Users = () =>
 
     let content;
 
-    if (userStatus === LoadState.NOT_STARTED)
+    if (userStatus === LoadStatus.NOT_STARTED)
     {
         content = <span>Not started</span>;
     }
-    else if (userStatus === LoadState.LOADED)
+    else if (userStatus === LoadStatus.LOADING)
+    {
+        content = <span>Loading ...</span>;
+    }
+    else if (userStatus === LoadStatus.LOADED)
     {
         content = userList.map(user =>
         {
@@ -29,7 +34,7 @@ export const Users = () =>
     return (<div>
         {content}
         <button
-            disabled={userStatus !== LoadState.NOT_STARTED}
+            disabled={userStatus !== LoadStatus.NOT_STARTED}
             onClick={() =>
             {
                 dispatch(fetchUsers())

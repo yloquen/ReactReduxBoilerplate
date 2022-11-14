@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App"
 import {Provider} from "react-redux";
@@ -11,24 +11,53 @@ import {Posts} from "./components/Posts";
 import {PostDetails} from "./components/PostDetails";
 import {Tweens} from "./components/Tweens";
 import {Styles} from "./components/Styles";
+import Test from "./components/Test";
+import $ from "jquery";
 
 
+const Comp1 = (props) =>
+{
+    return <Comp2>
+        TEST
+    </Comp2>;
+};
+
+
+const Comp2 = (props) =>
+{
+    debugger;
+
+    return ReactDOM.createPortal(
+        <button ref={props.myRef} id="test">{props.children}</button>,
+        $("#portal")[0]);
+};
+
+const e = React.createElement(Comp1);
+ReactDOM.render(e, document.querySelector('#root'));
+
+
+/*
 ReactDOM.render(
 
     <Provider store={store}>
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<App />}>
-                    <Route path="/users" element={<Users/>} />
-                    <Route path="/posts" element={<Posts/>}>
-                        <Route index element={<div>Not found</div>}/>
-                        <Route path=":postId" element={<PostDetails/>}/>
+            <Test/>
+            {
+                /!*
+                <Routes>
+                    <Route path="/" element={<App />}>
+                        <Route path="/users" element={<Users/>} />
+                        <Route path="/posts" element={<Posts/>}>
+                            <Route index element={<div>Not found</div>}/>
+                            <Route path=":postId" element={<PostDetails/>}/>
+                        </Route>
+                        <Route path="/tweens" element={<Tweens/>}/>
+                        <Route path="/styles" element={<Styles/>}/>
                     </Route>
-                    <Route path="/tweens" element={<Tweens/>}/>
-                    <Route path="/styles" element={<Styles/>}/>
-                </Route>
-            </Routes>
+                </Routes>
+                *!/
+            }
         </BrowserRouter>
     </Provider>,
 
-    document.querySelector('#root'));
+    document.querySelector('#root'));*/

@@ -14,7 +14,13 @@ let Post = ({post}) =>
     const postStyle = { fontSize:"1rem" };
 
     return (<div style={postStyle}>
-        {<button onClick={()=>{ dispatch(likePost(post.id)) }}>Like {post.likes}</button>}
+
+
+        {<button onClick={()=>
+        {
+            const a = likePost(post.id);
+            dispatch(a);
+        }}>Like {post.likes}</button>}
         <div>
             {post.id}
         </div>

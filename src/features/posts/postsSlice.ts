@@ -22,9 +22,6 @@ export const
 }
     = postsAdapter.getSelectors((state:RootState) => state.posts);
 
-
-
-
 const postsSlice = createSlice(
 {
     name:'posts',
